@@ -6,6 +6,7 @@ import { Product } from '@/types';
 import { useCart } from '@/store/useCart';
 import { Header } from '@/components/Header';
 import { SearchBar } from '@/components/SearchBar';
+import { Footer } from '@/components/Footer';
 
 const products: Product[] = [{
   id: '1',
@@ -33,6 +34,8 @@ const products: Product[] = [{
   category: 'Category 1'
 }];
 
+
+
 export default function Home() {
 
   const searchQuery = useCart((state) => state.searchQuery);
@@ -42,13 +45,13 @@ export default function Home() {
   );
 
   return (
-    <div className='min-h-screen bg-[#F8F9FA]'>
+    <div className="min-h-screen bg-[url('/logo.jpeg')] bg-no-repeat bg-center">
       <Header />
 
       <main className='mx-auto px-4 pb-12'>
         <SearchBar />
 
-        <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
+        <div className='grid md:grid-cols-3 lg:grid-cols-3 gap-10'>
           {filteredProducts.map(product => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -62,6 +65,7 @@ export default function Home() {
       </main>
 
       <CartDrawer />
+      <Footer />
     </div>
   );
 }

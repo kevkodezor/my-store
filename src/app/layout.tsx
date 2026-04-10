@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'My Store',
-  description: 'My Store',
+  title: 'Agunisex',
+  description: 'Web para realizar encargos de ropa vía whatsapp',
 };
 
 export default function RootLayout({

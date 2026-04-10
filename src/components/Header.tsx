@@ -1,7 +1,8 @@
 'use client';
 
-import { useCart } from '@/store/useCart';
+import Image from 'next/image';
 import { ShoppingBagIcon } from 'lucide-react';
+import { useCart } from '@/store/useCart';
 
 export const Header = () => {
     const { setDrawer, getTotalItems } = useCart();
@@ -9,8 +10,10 @@ export const Header = () => {
 
     return (
         <header className='m-2 p-4 rounded-md shadow bg-white flex justify-between items-center sticky top-0 z-40'>
-            <div className='font-bold text-xl tracking-tight text-blue-600'>MI TIENDA</div>
-
+            <div className='flex items-center gap-2'>
+                <Image src='/logo.jpeg' alt='Logo' width={50} height={50} />
+                <div className='font-bold text-xl tracking-tight'>Agunisex</div>
+            </div>
             <button
                 onClick={() => setDrawer(true)}
                 className='relative p-2.5 text-slate-700 hover:bg-slate-100 rounded-full transition-all active:scale-90 cursor-pointer'

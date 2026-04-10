@@ -1,7 +1,6 @@
 'use client';
 
 import { useCart } from '@/store/useCart';
-import { CartItem } from '@/types';
 import { generateWhatsAppLink } from '@/utils/whatsapp';
 import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
 

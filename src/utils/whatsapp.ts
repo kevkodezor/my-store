@@ -1,7 +1,7 @@
 import { CartItem } from '@/types';
 
 export const generateWhatsAppLink = (cart: CartItem[], totalUsd: number, exchangeRate: number) => {
-    const phoneNumber = '584141234567'; // Configurable
+    const phoneNumber = '584142774829';
     const totalBs = (totalUsd * exchangeRate).toFixed(2);
 
     let message = `*Nuevo Pedido*%0A%0A`;
