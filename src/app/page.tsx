@@ -42,7 +42,7 @@ export default function Home() {
   );
 
   return (
-    <div className='min-h-screen bg-[#F8F9FA]'>
+    <div className='min-h-screen bg-brand-accent-20'>
       <Header />
 
       <main className='mx-auto px-4 pb-12'>

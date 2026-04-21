@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { CheckIcon } from 'lucide-react';
+import { CheckIcon, TrashIcon } from 'lucide-react';
 import { useCart } from '@/store/useCart';
 import { Product } from '@/types';
 
@@ -11,7 +11,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
 
     return (
         <div className='group flex flex-col border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white h-full'>
-            <div className='relative w-full aspect-square overflow-hidden bg-gray-50'>
+            <div className='relative w-full aspect-square overflow-hidden'>
                 <Image
                     src={product.image}
                     alt={product.name}
@@ -33,7 +33,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                     className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2
                         ${isAdded
                             ? 'bg-green-50 text-green-700 border border-green-200 cursor-default'
-                            : 'bg-black text-white hover:bg-gray-800 active:scale-95 cursor-pointer shadow-md hover:shadow-lg'
+                            : 'bg-brand-primary text-white hover:bg-brand-secondary active:scale-95 cursor-pointer shadow-md hover:shadow-lg'
                         }`}
                 >
                     {isAdded ? (

@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'My Store',
-  description: 'My Store',
+  title: 'Agüita',
+  description: 'Agüita Store, pagina tipo tienda para la realización de pedidos',
 };
 
 export default function RootLayout({

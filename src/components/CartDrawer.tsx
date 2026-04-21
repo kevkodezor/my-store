@@ -3,7 +3,7 @@
 import { useCart } from '@/store/useCart';
 import { CartItem } from '@/types';
 import { generateWhatsAppLink } from '@/utils/whatsapp';
-import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
+import { MessageCircleCheckIcon, MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
 
 export const CartDrawer = () => {
     const { cart, isDrawerOpen, setDrawer, removeFromCart, decreaseQuantity, addToCart } = useCart();
@@ -33,7 +33,7 @@ export const CartDrawer = () => {
                             <p className='text-center text-gray-500 mt-10'>Tu carrito está vacío</p>
                         ) : (
                             cart.map(item => (
-                                <div key={item.id} className='flex items-center gap-3 bg-gray-50 p-3 rounded-lg'>
+                                <div key={item.id} className='flex items-center gap-3 bg-brand-accent-20 p-3 rounded-lg'>
                                     <div className='flex-1'>
                                         <p className='font-semibold text-sm'>{item.name}</p>
                                         <p className='text-xs text-gray-500'>{item.price} $ x {item.quantity}</p>
@@ -69,18 +69,18 @@ export const CartDrawer = () => {
                         <div className='border-t pt-6 space-y-3'>
                             <div className='flex justify-between items-end'>
                                 <span className='text-gray-600'>Total USD:</span>
-                                <span className='text-2xl font-bold text-blue-600'>${totalUsd.toFixed(2)}</span>
+                                <span className='text-2xl font-bold text-brand-secondary'>${totalUsd.toFixed(2)}</span>
                             </div>
-                            <div className='flex justify-between text-sm text-gray-500'>
+                            <div className='flex justify-between text-sm text-brand-tertiary'>
                                 <span>Total Bs:</span>
                                 <span>{(totalUsd * exchangeRate).toFixed(2)} Bs</span>
                             </div>
                             <a
                                 href={generateWhatsAppLink(cart, totalUsd, exchangeRate)}
                                 target='_blank'
-                                className='block w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-green-100'
+                                className='flex items-center justify-center gap-2 w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-green-100'
                             >
-                                Confirmar por WhatsApp
+                                <MessageCircleCheckIcon size={24} /> Confirmar por WhatsApp
                             </a>
                         </div>
                     )}
