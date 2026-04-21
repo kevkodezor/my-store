@@ -13,6 +13,9 @@ interface CartState {
     decreaseQuantity: (id: string) => void;
     // Helper para contar items totales
     getTotalItems: () => number;
+    // Categories
+    selectedCategories: string[];
+    toggleCategory: (category: string) => void;
 }
 
 export const useCart = create<CartState>(
@@ -41,5 +44,15 @@ export const useCart = create<CartState>(
                     : item
             )
         })),
+        // categories
+        selectedCategories: [],
+        toggleCategory: (category) => set((state) => {
+            const isSelected = state.selectedCategories.includes(category);
+            return {
+                selectedCategories: isSelected
+                    ? state.selectedCategories.filter(c => c !== category)
+                    : [...state.selectedCategories, category]
+            };
+        }),
     })
 );
