@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useCart } from '@/store/useCart';
 import { CheckIcon, FilterIcon, ShoppingBagIcon, XIcon } from 'lucide-react';
+import { PiWhatsappLogo, PiInstagramLogoLight, PiTiktokLogoLight } from 'react-icons/pi';
+import Link from 'next/link';
 
 export const Header = ({ categories }: { categories: string[] }) => {
     const { setDrawer, getTotalItems, selectedCategories, toggleCategory } = useCart();
@@ -13,6 +15,18 @@ export const Header = ({ categories }: { categories: string[] }) => {
     return (
         <header className='m-2 p-4 rounded-md shadow bg-white flex justify-between items-center sticky top-0 z-40'>
             <div className='font-bold text-xl tracking-tight text-blue-600'>MI TIENDA</div>
+
+            <div className='flex items-center gap-4'>
+                <Link href='#' target='_blank'>
+                    <PiWhatsappLogo size={28} color='#25d366' />
+                </Link>
+                <Link href='#' target='_blank'>
+                    <PiInstagramLogoLight size={28} color='#d6249f' />
+                </Link>
+                <Link href='#' target='_blank'>
+                    <PiTiktokLogoLight size={28} color='#000000' />
+                </Link>
+            </div>
 
             <div className='flex items-center gap-2'>
                 {/* Botón de Filtro */}
