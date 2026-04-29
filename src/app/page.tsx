@@ -29,10 +29,10 @@ export default function Home() {
 
   return (
     <div className='min-h-screen bg-[#F8F9FA]'>
-      <Header />
+      <Header categories={categories} />
 
       <main className='mx-auto px-4 pb-12'>
-        <SearchBar categories={categories} />
+        <SearchBar />
 
         <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
           {filteredProducts.map(product => (
