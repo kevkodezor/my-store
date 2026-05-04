@@ -5,8 +5,9 @@ import { useCart } from '@/store/useCart';
 import { CheckIcon, FilterIcon, ShoppingBagIcon, XIcon } from 'lucide-react';
 import { PiWhatsappLogo, PiInstagramLogoLight, PiTiktokLogoLight } from 'react-icons/pi';
 import Link from 'next/link';
+import { Category } from '@/types/category';
 
-export const Header = ({ categories }: { categories: string[] }) => {
+export const Header = ({ categories }: { categories: Category[] }) => {
     const { setDrawer, getTotalItems, selectedCategories, toggleCategory } = useCart();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -57,15 +58,15 @@ export const Header = ({ categories }: { categories: string[] }) => {
                         </div>
                         <div className='flex flex-col gap-1 max-h-60 overflow-y-auto'>
                             {categories.map(category => {
-                                const isSelected = selectedCategories.includes(category);
+                                const isSelected = selectedCategories.includes(category.id);
                                 return (
                                     <button
-                                        key={category}
-                                        onClick={() => toggleCategory(category)}
+                                        key={category.id}
+                                        onClick={() => toggleCategory(category.id)}
                                         className={`flex items-center justify-between w-full p-2.5 rounded-xl text-sm transition-colors cursor-pointer
                                     ${isSelected ? 'bg-blue-50 text-blue-700 font-medium' : 'hover:bg-gray-50 text-gray-600'}`}
                                     >
-                                        {category}
+                                        {category.name}
                                         {isSelected && <CheckIcon size={16} />}
                                     </button>
                                 );

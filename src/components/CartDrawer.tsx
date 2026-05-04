@@ -7,8 +7,8 @@ import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
 
 export const CartDrawer = () => {
     const { cart, isDrawerOpen, setDrawer, removeFromCart, decreaseQuantity, addToCart } = useCart();
-    const exchangeRate = 36.5;
-    const totalUsd = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const exchangeRate = 489.19;
+    const totalUsd = cart.reduce((acc, item) => acc + (item.basePrice * item.quantity), 0);
 
     return (
         <>
@@ -36,7 +36,7 @@ export const CartDrawer = () => {
                                 <div key={item.id} className='flex items-center gap-3 bg-gray-50 p-3 rounded-lg'>
                                     <div className='flex-1'>
                                         <p className='font-semibold text-sm'>{item.name}</p>
-                                        <p className='text-xs text-gray-500'>{item.price} $ x {item.quantity}</p>
+                                        <p className='text-xs text-gray-500'>{item.basePrice} $ x {item.quantity}</p>
                                     </div>
                                     {/* Controles de Cantidad */}
                                     <div className='flex items-center bg-gray-100 rounded-lg p-1 gap-2'>
