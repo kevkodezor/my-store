@@ -33,33 +33,42 @@ export const CartDrawer = () => {
                             <p className='text-center text-gray-500 mt-10'>Tu carrito está vacío</p>
                         ) : (
                             cart.map(item => (
-                                <div key={item.id} className='flex items-center gap-3 bg-gray-50 p-3 rounded-lg'>
-                                    <div className='flex-1'>
-                                        <p className='font-semibold text-sm'>{item.name}</p>
-                                        <p className='text-xs text-gray-500'>{item.basePrice} $ x {item.quantity}</p>
+                                <div key={item.cartItemId} className='flex flex-col gap-3 bg-gray-50 p-3 rounded-lg'>
+                                    <span className='font-semibold'>{item.name}</span>
+
+                                    <div className='flex justify-between items-center'>
+                                        <div className='gray-500'>{item.basePrice} $ x {item.quantity}</div>
+                                        {item.selectedSize && (
+                                            <span className="inline-block px-2 py-0.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase rounded-md border border-brand-primary/20">
+                                                Talla: {item.selectedSize}
+                                            </span>
+                                        )}
                                     </div>
                                     {/* Controles de Cantidad */}
-                                    <div className='flex items-center bg-gray-100 rounded-lg p-1 gap-2'>
-                                        <button
-                                            onClick={() => decreaseQuantity(item.id)}
-                                            className='p-1 hover:bg-white rounded shadow-sm transition-colors'
-                                            disabled={item.quantity === 1}
-                                        >
-                                            <MinusIcon size={14} />
-                                        </button>
+                                    <div className='flex justify-between items-center'>
+                                        <div className='flex items-center gap-2'>
+                                            <button
+                                                onClick={() => decreaseQuantity(item.cartItemId)}
+                                                className='p-1 hover:bg-white rounded shadow-sm transition-colors'
+                                                disabled={item.quantity === 1}
+                                            >
+                                                <MinusIcon size={14} />
+                                            </button>
 
-                                        <span className='text-xs font-bold w-4 text-center'>{item.quantity}</span>
+                                            <span className='text-xs font-bold w-4 text-center'>{item.quantity}</span>
 
-                                        <button
-                                            onClick={() => addToCart(item)}
-                                            className='p-1 hover:bg-white rounded shadow-sm transition-colors'
-                                        >
-                                            <PlusIcon size={14} />
+                                            <button
+                                                onClick={() => addToCart(item)}
+                                                className='p-1 hover:bg-white rounded shadow-sm transition-colors'
+                                            >
+                                                <PlusIcon size={14} />
+                                            </button>
+                                        </div>
+                                        <button onClick={() => removeFromCart(item.cartItemId)} className='text-red-400 text-sm cursor-pointer'>
+                                            <Trash2Icon size={20} strokeWidth={2} />
                                         </button>
                                     </div>
-                                    <button onClick={() => removeFromCart(item.id)} className='text-red-400 text-sm cursor-pointer'>
-                                        <Trash2Icon size={20} strokeWidth={2} />
-                                    </button>
+
                                 </div>
                             ))
                         )}
