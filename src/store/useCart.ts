@@ -46,7 +46,7 @@ export const useCart = create<CartState>(
         })),
         // categories
         selectedCategories: [],
-        toggleCategory: (category) => set((state) => {
+        toggleCategory: (category: string) => set((state) => {
             const isSelected = state.selectedCategories.includes(category);
             return {
                 selectedCategories: isSelected

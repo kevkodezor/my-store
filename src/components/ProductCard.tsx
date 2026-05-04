@@ -13,7 +13,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
         <div className='group flex flex-col border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 bg-white h-full'>
             <div className='relative w-full aspect-square overflow-hidden'>
                 <Image
-                    src={product.image}
+                    src={product.imageUrl}
                     alt={product.name}
                     width={500}
                     height={500}
@@ -25,7 +25,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                     {product.name}
                 </h3>
                 <div className='mt-auto flex items-center justify-between mb-4'>
-                    <p className='text-xl font-bold text-gray-900'>${product.price}</p>
+                    <p className='text-xl font-bold text-gray-900'>${product.basePrice}</p>
                 </div>
                 <button
                     onClick={() => !isAdded && addToCart(product)}
