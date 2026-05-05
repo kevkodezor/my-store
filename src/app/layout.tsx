@@ -35,7 +35,7 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <Header categories={categories} />
-      <body className='min-h-screen flex flex-col bg-[#F8F9FA]'>
+      <body className='min-h-screen flex flex-col'>
         {children}
         <CartDrawer />
         <Footer />
