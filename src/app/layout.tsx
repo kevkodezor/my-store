@@ -4,6 +4,7 @@ import './globals.css';
 import { Header } from '@/components/Header';
 import { getCategories } from '@/actions/products';
 import { CartDrawer } from '@/components/CartDrawer';
+import { Footer } from '@/components/Footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -37,6 +38,7 @@ export default async function RootLayout({
       <body className='min-h-screen flex flex-col bg-[#F8F9FA]'>
         {children}
         <CartDrawer />
+        <Footer />
       </body>
     </html>
   );

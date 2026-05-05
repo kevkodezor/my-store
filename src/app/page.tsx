@@ -38,7 +38,7 @@ export default function Home() {
   });
 
   return (
-    <div className='mx-5'>
+    <div className='mx-5 mb-5'>
       <SearchBar />
 
       <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
