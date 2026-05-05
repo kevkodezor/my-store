@@ -19,6 +19,16 @@ export const getProducts = async () => {
     }
 }
 
+export const getProductById = async (id: string) => {
+    try {
+        const response = await api.get(`/products/${id}`, { searchParams: params }).json();
+        return response as Product;
+    } catch (error) {
+        console.error('Error fetching product:', error);
+        throw error;
+    }
+}
+
 // Categories
 export const getCategories = async () => {
     try {

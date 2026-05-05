@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { Header } from '@/components/Header';
+import { getCategories } from '@/actions/products';
+import { CartDrawer } from '@/components/CartDrawer';
+import { Footer } from '@/components/Footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -17,17 +21,25 @@ export const metadata: Metadata = {
   description: 'Agüita Store, pagina tipo tienda para la realización de pedidos',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
+  const categories = await getCategories();
+
   return (
     <html
       lang='en'
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className='min-h-full flex flex-col'>{children}</body>
+      <Header categories={categories} />
+      <body className='min-h-screen flex flex-col bg-[#F8F9FA]'>
+        {children}
+        <CartDrawer />
+        <Footer />
+      </body>
     </html>
   );
 }
