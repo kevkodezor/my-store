@@ -53,7 +53,7 @@ export const AddCart = ({ product }: { product: Product }) => {
                                     e.stopPropagation();
                                     setSelectedSize(size);
                                 }}
-                                className={`w-10 h-10 rounded-lg font-bold border cursor-pointer ${selectedSize === size ? 'border-black bg-black text-white' : 'border-gray-300 text-gray-600'
+                                className={`px-2.5 py-1 rounded-lg font-bold border cursor-pointer ${selectedSize === size ? 'border-black bg-black text-white' : 'border-gray-300 text-gray-600'
                                     }`}
                             >
                                 {size}
@@ -68,7 +68,7 @@ export const AddCart = ({ product }: { product: Product }) => {
                 onClick={handleAddToCart}
                 disabled={isAdded}
                 className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2
-                            ${isAdded
+                    ${isAdded
                         ? 'bg-green-50 text-green-700 border border-green-200 cursor-default'
                         : 'bg-black text-white hover:bg-gray-800 active:scale-95 cursor-pointer shadow-md hover:shadow-lg'
                     }`}

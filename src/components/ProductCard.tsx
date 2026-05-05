@@ -16,15 +16,17 @@ export const ProductCard = ({ product }: { product: Product }) => {
                     className='object-cover w-full h-full group-hover:scale-105 transition-transform duration-500'
                 />
             </div>
-            <div className='flex flex-col grow p-5 gap-2.5'>
-                <h3 className='font-medium text-gray-800 line-clamp-2 leading-6'>
-                    {product.name}
-                </h3>
-                <div className='flex items-center justify-between'>
-                    <p className='text-xl font-bold text-gray-900'>{product.basePrice} $</p>
-                    <Link href={`/product/${product.id}`} className='p-2.5 text-slate-700 hover:bg-slate-100 rounded-full transition-all active:scale-90 cursor-pointer'>
-                        <ScanEyeIcon size={24} />
-                    </Link>
+            <div className='flex flex-col grow p-5 gap-2.5 justify-between'>
+                <div className='grid gap-2'>
+                    <h3 className='font-medium text-gray-800 line-clamp-2 leading-6'>
+                        {product.name}
+                    </h3>
+                    <div className='flex items-center justify-between'>
+                        <p className='text-xl font-bold text-gray-900'>{product.basePrice} $</p>
+                        <Link href={`/product/${product.id}`} className='p-2.5 text-slate-700 hover:bg-slate-100 rounded-full transition-all active:scale-90 cursor-pointer'>
+                            <ScanEyeIcon size={24} />
+                        </Link>
+                    </div>
                 </div>
                 <AddCart product={product} />
             </div>
