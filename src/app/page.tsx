@@ -4,31 +4,22 @@ import { ProductCard } from '@/components/ProductCard';
 import { Product } from '@/types';
 import { useCart } from '@/store/useCart';
 import { SearchBar } from '@/components/SearchBar';
-import { getProducts, getCategories } from '@/actions/products';
+import { getProducts } from '@/actions/products';
 import { useState, useEffect } from 'react';
-import { Category } from '@/types/category';
 
 export default function Home() {
 
   const { searchQuery, selectedCategories } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
     getAllProducts();
-    getAllCategories();
   }, []);
 
   const getAllProducts = async () => {
     const result = await getProducts();
     setProducts(result);
   }
-
-  const getAllCategories = async () => {
-    const result = await getCategories();
-    setCategories(result);
-  }
-
 
   const filteredProducts = products.filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
