@@ -6,3 +6,11 @@ export const api = ky.create({
         'Content-Type': 'application/json',
     },
 });
+
+
+export const apiExchange = ky.create({
+    prefix: process.env.EXCHANGE_RATE_API_URL,
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});

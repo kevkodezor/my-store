@@ -1,18 +1,23 @@
 'use client';
 
 import { useCart } from '@/store/useCart';
-import { CartItem } from '@/types';
 import { generateWhatsAppLink } from '@/utils/whatsapp';
 import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
+import { Exchange } from '@/types/exchange';
 
-export const CartDrawer = () => {
+interface Props {
+    exchange: Exchange
+}
+
+export const CartDrawer = ({ exchange }: Props) => {
     const { cart, isDrawerOpen, setDrawer, removeFromCart, decreaseQuantity, addToCart } = useCart();
-    const exchangeRate = 489.19;
     const totalUsd = cart.reduce((acc, item) => acc + (item.basePrice * item.quantity), 0);
+
+    const rate = Math.trunc(exchange.promedio * 100) / 100;
+    const totalBs = Math.trunc((totalUsd * rate) * 100) / 100;
 
     return (
         <>
-            {/* Overlay: Fondo oscuro al abrir */}
             <div
                 className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300 ${isDrawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                 onClick={() => setDrawer(false)}
@@ -81,11 +86,15 @@ export const CartDrawer = () => {
                                 <span className='text-2xl font-bold text-blue-600'>${totalUsd.toFixed(2)}</span>
                             </div>
                             <div className='flex justify-between text-sm text-gray-500'>
+                                <span>Tasa:</span>
+                                <span>{rate} Bs</span>
+                            </div>
+                            <div className='flex justify-between text-sm text-gray-500'>
                                 <span>Total Bs:</span>
-                                <span>{(totalUsd * exchangeRate).toFixed(2)} Bs</span>
+                                <span>{totalBs} Bs</span>
                             </div>
                             <a
-                                href={generateWhatsAppLink(cart, totalUsd, exchangeRate)}
+                                href={generateWhatsAppLink(cart, totalUsd, exchange.promedio)}
                                 target='_blank'
                                 className='block w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-green-100'
                             >

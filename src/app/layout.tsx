@@ -5,6 +5,7 @@ import { Header } from '@/components/Header';
 import { getCategories } from '@/actions/products';
 import { CartDrawer } from '@/components/CartDrawer';
 import { Footer } from '@/components/Footer';
+import { getExchange } from '@/actions/exchange';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -28,6 +29,7 @@ export default async function RootLayout({
 }>) {
 
   const categories = await getCategories();
+  const exchange = await getExchange();
 
   return (
     <html
@@ -39,7 +41,7 @@ export default async function RootLayout({
         <main className='flex-1'>
           {children}
         </main>
-        <CartDrawer />
+        <CartDrawer exchange={exchange} />
         <Footer />
       </body>
     </html>

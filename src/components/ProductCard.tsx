@@ -14,6 +14,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                     width={500}
                     height={500}
                     className='object-cover w-full h-full group-hover:scale-105 transition-transform duration-500'
+                    loading='eager'
                 />
             </div>
             <div className='flex flex-col grow p-5 gap-2.5 justify-between'>
