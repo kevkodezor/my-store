@@ -3,15 +3,21 @@
 import { useCart } from '@/store/useCart';
 import { generateWhatsAppLink } from '@/utils/whatsapp';
 import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from 'lucide-react';
+import { Exchange } from '@/types/exchange';
 
-export const CartDrawer = () => {
+interface Props {
+    exchange: Exchange
+}
+
+export const CartDrawer = ({ exchange }: Props) => {
     const { cart, isDrawerOpen, setDrawer, removeFromCart, decreaseQuantity, addToCart } = useCart();
-    const exchangeRate = 36.5;
-    const totalUsd = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    const totalUsd = cart.reduce((acc, item) => acc + (item.basePrice * item.quantity), 0);
+
+    const rate = Math.trunc(exchange.promedio * 100) / 100;
+    const totalBs = Math.trunc((totalUsd * rate) * 100) / 100;
 
     return (
         <>
-            {/* Overlay: Fondo oscuro al abrir */}
             <div
                 className={`fixed inset-0 bg-black/40 z-50 transition-opacity duration-300 ${isDrawerOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
                 onClick={() => setDrawer(false)}
@@ -32,33 +38,42 @@ export const CartDrawer = () => {
                             <p className='text-center text-gray-500 mt-10'>Tu carrito está vacío</p>
                         ) : (
                             cart.map(item => (
-                                <div key={item.id} className='flex items-center gap-3 bg-gray-50 p-3 rounded-lg'>
-                                    <div className='flex-1'>
-                                        <p className='font-semibold text-sm'>{item.name}</p>
-                                        <p className='text-xs text-gray-500'>{item.price} $ x {item.quantity}</p>
+                                <div key={item.cartItemId} className='flex flex-col gap-3 bg-gray-50 p-3 rounded-lg'>
+                                    <span className='font-semibold'>{item.name}</span>
+
+                                    <div className='flex justify-between items-center'>
+                                        <div className='gray-500'>{item.basePrice} $ x {item.quantity}</div>
+                                        {item.selectedSize && (
+                                            <span className="inline-block px-2 py-0.5 bg-brand-primary/10 text-brand-primary text-[10px] font-black uppercase rounded-md border border-brand-primary/20">
+                                                Talla: {item.selectedSize}
+                                            </span>
+                                        )}
                                     </div>
                                     {/* Controles de Cantidad */}
-                                    <div className='flex items-center bg-gray-100 rounded-lg p-1 gap-2'>
-                                        <button
-                                            onClick={() => decreaseQuantity(item.id)}
-                                            className='p-1 hover:bg-white rounded shadow-sm transition-colors'
-                                            disabled={item.quantity === 1}
-                                        >
-                                            <MinusIcon size={14} />
-                                        </button>
+                                    <div className='flex justify-between items-center'>
+                                        <div className='flex items-center gap-2'>
+                                            <button
+                                                onClick={() => decreaseQuantity(item.cartItemId)}
+                                                className='p-1 hover:bg-white rounded shadow-sm transition-colors'
+                                                disabled={item.quantity === 1}
+                                            >
+                                                <MinusIcon size={14} />
+                                            </button>
 
-                                        <span className='text-xs font-bold w-4 text-center'>{item.quantity}</span>
+                                            <span className='text-xs font-bold w-4 text-center'>{item.quantity}</span>
 
-                                        <button
-                                            onClick={() => addToCart(item)}
-                                            className='p-1 hover:bg-white rounded shadow-sm transition-colors'
-                                        >
-                                            <PlusIcon size={14} />
+                                            <button
+                                                onClick={() => addToCart(item)}
+                                                className='p-1 hover:bg-white rounded shadow-sm transition-colors'
+                                            >
+                                                <PlusIcon size={14} />
+                                            </button>
+                                        </div>
+                                        <button onClick={() => removeFromCart(item.cartItemId)} className='text-red-400 text-sm cursor-pointer'>
+                                            <Trash2Icon size={20} strokeWidth={2} />
                                         </button>
                                     </div>
-                                    <button onClick={() => removeFromCart(item.id)} className='text-red-400 text-sm cursor-pointer'>
-                                        <Trash2Icon size={20} strokeWidth={2} />
-                                    </button>
+
                                 </div>
                             ))
                         )}
@@ -71,11 +86,15 @@ export const CartDrawer = () => {
                                 <span className='text-2xl font-bold text-blue-600'>${totalUsd.toFixed(2)}</span>
                             </div>
                             <div className='flex justify-between text-sm text-gray-500'>
+                                <span>Tasa:</span>
+                                <span>{rate} Bs</span>
+                            </div>
+                            <div className='flex justify-between text-sm text-gray-500'>
                                 <span>Total Bs:</span>
-                                <span>{(totalUsd * exchangeRate).toFixed(2)} Bs</span>
+                                <span>{totalBs} Bs</span>
                             </div>
                             <a
-                                href={generateWhatsAppLink(cart, totalUsd, exchangeRate)}
+                                href={generateWhatsAppLink(cart, totalUsd, exchange.promedio)}
                                 target='_blank'
                                 className='block w-full bg-green-500 hover:bg-green-600 text-white text-center py-4 rounded-2xl font-bold transition-colors shadow-lg shadow-green-100'
                             >

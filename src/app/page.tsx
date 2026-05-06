@@ -1,71 +1,50 @@
 'use client';
 
 import { ProductCard } from '@/components/ProductCard';
-import { CartDrawer } from '@/components/CartDrawer';
 import { Product } from '@/types';
 import { useCart } from '@/store/useCart';
-import { Header } from '@/components/Header';
 import { SearchBar } from '@/components/SearchBar';
-import { Footer } from '@/components/Footer';
-
-const products: Product[] = [{
-  id: '1',
-  name: 'Producto 1',
-  price: 10,
-  image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-  category: 'Category 1'
-}, {
-  id: '2',
-  name: 'Producto 2',
-  price: 10,
-  image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-  category: 'Category 1'
-}, {
-  id: '3',
-  name: 'Producto 3',
-  price: 10,
-  image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-  category: 'Category 1'
-}, {
-  id: '4',
-  name: 'Producto 4',
-  price: 10,
-  image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
-  category: 'Category 1'
-}];
+import { getProducts } from '@/actions/products';
+import { useState, useEffect } from 'react';
 
 
 
 export default function Home() {
 
-  const searchQuery = useCart((state) => state.searchQuery);
+  const { searchQuery, selectedCategories } = useCart();
+  const [products, setProducts] = useState<Product[]>([]);
 
-  const filteredProducts = products.filter(p =>
-    p.name.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  useEffect(() => {
+    getAllProducts();
+  }, []);
+
+  const getAllProducts = async () => {
+    const result = await getProducts();
+    setProducts(result);
+  }
+
+  const filteredProducts = products.filter(p => {
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(p.categoryId);
+
+    return matchesSearch && matchesCategory;
+  });
 
   return (
-    <div className="min-h-screen bg-[url('/logo.jpeg')] bg-no-repeat bg-center">
-      <Header />
+    <div className='mx-5 mb-5'>
+      <SearchBar />
 
-      <main className='mx-auto px-4 pb-12'>
-        <SearchBar />
+      <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6'>
+        {filteredProducts.map(product => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
 
-        <div className='grid md:grid-cols-3 lg:grid-cols-3 gap-10'>
-          {filteredProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+      {filteredProducts.length === 0 && (
+        <div className='text-center py-20 text-gray-400'>
+          No encontramos lo que buscas 🔍
         </div>
-
-        {filteredProducts.length === 0 && (
-          <div className='text-center py-20 text-gray-400'>
-            No encontramos lo que buscas 🔍
-          </div>
-        )}
-      </main>
-
-      <CartDrawer />
-      <Footer />
+      )}
     </div>
   );
 }

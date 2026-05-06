@@ -1,11 +1,15 @@
 export interface Product {
     id: string;
     name: string;
-    price: number; // Siempre en USD para base
-    image: string;
-    category: string;
+    basePrice: number;
+    imageUrl: string;
+    description?: string;
+    categoryId: string;
+    sizes: string[];
 }
 
 export interface CartItem extends Product {
+    cartItemId: string;
     quantity: number;
+    selectedSize?: string;
 }
