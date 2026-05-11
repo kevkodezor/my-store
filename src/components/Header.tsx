@@ -22,15 +22,15 @@ export const Header = ({ categories }: { categories: Category[] }) => {
             </div>
 
             <div className='flex items-center gap-4'>
-                <Link href='#' target='_blank'>
+                <Link href='https://chat.whatsapp.com/EvQ4bsl1D3VDK2TTC9Pny3' target='_blank'>
                     <PiWhatsappLogo size={28} color='#25d366' />
                 </Link>
-                <Link href='#' target='_blank'>
+                <Link href='https://www.instagram.com/agunisex/' target='_blank'>
                     <PiInstagramLogoLight size={28} color='#d6249f' />
                 </Link>
-                <Link href='#' target='_blank'>
+                {/* <Link href='#' target='_blank'>
                     <PiTiktokLogoLight size={28} color='#000000' />
-                </Link>
+                </Link> */}
             </div>
 
             <div className='flex items-center gap-2'>
