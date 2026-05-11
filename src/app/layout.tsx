@@ -31,6 +31,8 @@ export default async function RootLayout({
   const categories = await getCategories();
   const exchange = await getExchange();
 
+  console.log('LAYOUT', categories)
+
   return (
     <html
       lang='en'
