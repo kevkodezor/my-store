@@ -14,3 +14,7 @@ export const apiExchange = ky.create({
         'Content-Type': 'application/json',
     },
 });
+
+export const params = {
+    'orgId': process.env.ORG_ID
+}
