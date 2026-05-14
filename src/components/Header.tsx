@@ -14,19 +14,21 @@ export const Header = ({ categories }: { categories: Category[] }) => {
     const total = getTotalItems();
 
     return (
-        <header className='m-2 p-4 rounded-md shadow bg-white flex justify-between items-center sticky top-0 z-40'>
-            <div className='font-bold text-xl tracking-tight text-blue-600'>MI TIENDA</div>
+        <header className='p-4 rounded-b-xl shadow bg-onway-blue flex justify-between items-center sticky top-0 z-40'>
+            <div className='font-bold text-xl tracking-tight text-white'>
+                ON WAY SHOP
+            </div>
 
-            <div className='flex items-center gap-4'>
-                <Link href='#' target='_blank'>
+            <div className='flex items-center gap-4 bg-blue-air rounded-xl p-2'>
+                {/* <Link href='#' target='_blank'>
                     <PiWhatsappLogo size={28} color='#25d366' />
-                </Link>
-                <Link href='#' target='_blank'>
+                </Link> */}
+                <Link href='https://www.instagram.com/onway_shop_26/' target='_blank'>
                     <PiInstagramLogoLight size={28} color='#d6249f' />
                 </Link>
-                <Link href='#' target='_blank'>
+                {/* <Link href='#' target='_blank'>
                     <PiTiktokLogoLight size={28} color='#000000' />
-                </Link>
+                </Link> */}
             </div>
 
             <div className='flex items-center gap-2'>
@@ -34,13 +36,13 @@ export const Header = ({ categories }: { categories: Category[] }) => {
                 <button
                     aria-label='Abrir filtros'
                     onClick={() => setIsOpen(!isOpen)}
-                    className={`relative p-2.5 text-slate-700 hover:bg-slate-100 rounded-full transition-all active:scale-90 cursor-pointer
+                    className={`relative p-2.5 text-white hover:bg-blue-deep/80 rounded-full transition-all active:scale-90 cursor-pointer
                     ${isOpen || selectedCategories.length > 0 ? 'ring-blue-500 text-blue-600' : 'ring-gray-200 text-gray-500'}`}
                 >
                     <FilterIcon size={24} />
                     {/* Indicador de filtros activos */}
                     {selectedCategories.length > 0 && (
-                        <span className='absolute top-2 right-2 h-2.5 w-2.5 bg-blue-600 rounded-full border-2 border-white'></span>
+                        <span className='absolute top-2 right-2 h-2.5 w-2.5 bg-blue-deep rounded-full border-2 border-white'></span>
                     )}
                 </button>
                 {/* Menú Dropdown (Multiselect) */}
@@ -77,13 +79,13 @@ export const Header = ({ categories }: { categories: Category[] }) => {
                 {/* Boton del carrito */}
                 <button
                     onClick={() => setDrawer(true)}
-                    className='relative p-2.5 text-slate-700 hover:bg-slate-100 rounded-full transition-all active:scale-90 cursor-pointer'
+                    className='relative p-2.5 text-white hover:bg-blue-deep/80 rounded-full transition-all active:scale-90 cursor-pointer'
                     aria-label='Abrir carrito'
                 >
                     <ShoppingBagIcon size={24} strokeWidth={2} />
                     {/* Badge de cantidad */}
                     {total > 0 && (
-                        <span className='absolute top-0 right-0 bg-blue-600 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm'>
+                        <span className='absolute top-0 right-0 bg-blue-deep/80 text-white text-[10px] font-bold h-5 w-5 flex items-center justify-center rounded-full border-2 border-white shadow-sm'>
                             {total}
                         </span>
                     )}

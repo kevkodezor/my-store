@@ -17,7 +17,7 @@ export const ProductCard = ({ product }: { product: Product }) => {
                     loading='eager'
                 />
             </div>
-            <div className='flex flex-col grow p-5 gap-2.5 justify-between'>
+            <div className='flex flex-col grow justify-between p-5 gap-2.5'>
                 <div className='grid gap-2'>
                     <h3 className='font-medium text-gray-800 line-clamp-2 leading-6'>
                         {product.name}

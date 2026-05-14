@@ -69,8 +69,8 @@ export const AddCart = ({ product }: { product: Product }) => {
                 disabled={isAdded}
                 className={`w-full py-3 rounded-xl text-sm font-semibold transition-all duration-200 flex items-center justify-center gap-2
                     ${isAdded
-                        ? 'bg-green-50 text-green-700 border border-green-200 cursor-default'
-                        : 'bg-black text-white hover:bg-gray-800 active:scale-95 cursor-pointer shadow-md hover:shadow-lg'
+                        ? 'bg-blue-air text-blue-deep border border-blue-deep cursor-default'
+                        : 'bg-blue-deep text-white hover:bg-blue-deep/80 active:scale-95 cursor-pointer shadow-md hover:shadow-lg'
                     }`}
             >
                 {isAdded ? (
